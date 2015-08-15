@@ -1,11 +1,11 @@
 package com.github.davinkevin.betmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -30,6 +30,7 @@ public class Bet {
         return this;
     }
 
+    @Enumerated(EnumType.STRING)
     public Result getValue() {
         return value;
     }
@@ -39,7 +40,7 @@ public class Bet {
         return this;
     }
 
-    @ManyToOne
+    @ManyToOne @JsonIgnore
     public Match getMatch() {
         return match;
     }
@@ -49,7 +50,7 @@ public class Bet {
         return this;
     }
 
-    @ManyToOne
+    @ManyToOne @JsonIgnore
     public User getUser() {
         return user;
     }
@@ -57,5 +58,29 @@ public class Bet {
     public Bet setUser(User user) {
         this.user = user;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bet)) return false;
+
+        Bet bet = (Bet) o;
+        return new EqualsBuilder()
+                .append(id, bet.id)
+                .append(value, bet.value)
+                .append(match, bet.match)
+                .append(user, bet.user)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(value)
+                .append(match)
+                .append(user)
+                .toHashCode();
     }
 }

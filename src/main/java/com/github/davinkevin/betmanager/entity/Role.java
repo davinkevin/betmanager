@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
  */
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Role {
+public class Role implements Serializable {
 
     private Integer id;
     private String name;

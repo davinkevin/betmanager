@@ -5,6 +5,7 @@ import com.github.davinkevin.betmanager.service.CompetitionService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -16,6 +17,11 @@ public class CompetitionController {
 
     @Inject CompetitionController(CompetitionService competitionService) {
         this.competitionService = competitionService;
+    }
+
+    @RequestMapping
+    public List<Competition> findAll() {
+        return competitionService.findAll();
     }
 
     @RequestMapping(value = "{id}")

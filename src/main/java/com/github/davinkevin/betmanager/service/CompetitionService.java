@@ -5,6 +5,7 @@ import com.github.davinkevin.betmanager.repository.CompetitionRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -21,6 +22,10 @@ public class CompetitionService {
 
     public Competition findOne(Long id) {
         return competitionRepository.findOne(id);
+    }
+
+    public List<Competition> findAll() {
+        return competitionRepository.findAll();
     }
 
     public void delete(Long id) {

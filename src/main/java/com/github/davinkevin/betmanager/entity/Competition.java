@@ -1,5 +1,6 @@
 package com.github.davinkevin.betmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -49,6 +50,7 @@ public class Competition {
         return this;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "competition")
     public Set<Match> getMatchs() {
         return matchs;
