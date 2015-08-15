@@ -5,6 +5,7 @@ import com.github.davinkevin.betmanager.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.Optional;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -24,6 +25,10 @@ public class UserService {
 
     public User findOne(Long id) {
         return userRepository.findOne(id);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public void delete(Long id) {

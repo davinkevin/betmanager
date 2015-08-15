@@ -1,16 +1,23 @@
 package com.github.davinkevin.betmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toSet;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
  */
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class User /*implements UserDetails*/ {
+public class User implements UserDetails {
 
     private Long id;
     private String username;
@@ -29,7 +36,7 @@ public class User /*implements UserDetails*/ {
         return this;
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public Set<Role> getRoles() {
         return roles;
     }
@@ -44,13 +51,13 @@ public class User /*implements UserDetails*/ {
         return this;
     }
 
-    /*@Transient
+    @Transient @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles
                 .stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(toSet());
-    }*/
+    }
 
     public String getPassword() {
         return password;
@@ -70,16 +77,17 @@ public class User /*implements UserDetails*/ {
         return this;
     }
 
-    @Transient public String getUsername() {
+    public String getUsername() {
         return username;
     }
-    @Transient public boolean isAccountNonExpired() {
+
+    @Transient @JsonIgnore public boolean isAccountNonExpired() {
         return enabled;
     }
-    @Transient public boolean isAccountNonLocked() {
+    @Transient @JsonIgnore public boolean isAccountNonLocked() {
         return enabled;
     }
-    @Transient public boolean isCredentialsNonExpired() {
+    @Transient @JsonIgnore public boolean isCredentialsNonExpired() {
         return enabled;
     }
 }
