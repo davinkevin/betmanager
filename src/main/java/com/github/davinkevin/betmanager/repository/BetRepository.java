@@ -4,8 +4,8 @@ import com.github.davinkevin.betmanager.entity.Bet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import static com.github.davinkevin.betmanager.repository.BetDSL.withMatchId;
-import static com.github.davinkevin.betmanager.repository.BetDSL.withUserId;
+import static com.github.davinkevin.betmanager.repository.dsl.BetDSL.withMatchId;
+import static com.github.davinkevin.betmanager.repository.dsl.BetDSL.withUserId;
 
 /**
  * Created by kevin on 11/08/15 for betmanager

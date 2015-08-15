@@ -1,4 +1,4 @@
-package com.github.davinkevin.betmanager.repository;
+package com.github.davinkevin.betmanager.repository.dsl;
 
 import com.github.davinkevin.betmanager.entity.QBet;
 import com.mysema.query.types.expr.BooleanExpression;
