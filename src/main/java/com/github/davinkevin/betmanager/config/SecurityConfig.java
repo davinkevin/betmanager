@@ -1,6 +1,6 @@
 package com.github.davinkevin.betmanager.config;
 
-import com.github.davinkevin.betmanager.security.BetManagerUserDetailsService;
+import com.github.davinkevin.betmanager.security.CustomUserDetailsService;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -32,7 +32,7 @@ import static java.util.Objects.nonNull;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Inject BetManagerUserDetailsService userDetailsService;
+    @Inject CustomUserDetailsService userDetailsService;
 
     protected void configure(HttpSecurity http) throws Exception {
         http
