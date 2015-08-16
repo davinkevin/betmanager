@@ -2,6 +2,7 @@ package com.github.davinkevin.betmanager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -54,6 +55,7 @@ public class Match {
         return this;
     }
 
+    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
     public ZonedDateTime getDate() {
         return date;
     }

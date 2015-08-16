@@ -5,6 +5,7 @@ import com.github.davinkevin.betmanager.service.MatchService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -22,6 +23,16 @@ public class MatchController {
     @RequestMapping
     public Iterable<Match> findAll(@PathVariable Long idCompetition){
         return matchService.findByCompetition(idCompetition);
+    }
+
+    @RequestMapping(value = "past")
+    public Iterable<Match> findAllInPast(@PathVariable Long idCompetition){
+        return matchService.findByCompetitionAndDateBefore(idCompetition, ZonedDateTime.now());
+    }
+
+    @RequestMapping(value = "future")
+    public Iterable<Match> findAllInFuture(@PathVariable Long idCompetition){
+        return matchService.findByCompetitionAndDateAfter(idCompetition, ZonedDateTime.now());
     }
 
     @RequestMapping(value = "{id}")

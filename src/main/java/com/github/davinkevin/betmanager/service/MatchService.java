@@ -7,6 +7,7 @@ import com.github.davinkevin.betmanager.repository.MatchRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -42,5 +43,13 @@ public class MatchService {
 
     public void delete(Long id) {
         matchRepository.delete(id);
+    }
+
+    public Iterable<Match> findByCompetitionAndDateBefore(Long idCompetition, ZonedDateTime date) {
+        return matchRepository.findByCompetitionAndDateBefore(idCompetition, date);
+    }
+
+    public Iterable<Match> findByCompetitionAndDateAfter(Long idCompetition, ZonedDateTime date) {
+        return matchRepository.findByCompetitionAndDateAfter(idCompetition, date);
     }
 }
