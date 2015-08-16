@@ -14,7 +14,7 @@ public class BetDSL {
     public static BooleanExpression withUserId(Long id) {
         return QBet.bet.user.id.eq(id);
     }
-    public static BooleanExpression witchCompetitionId(Long id) {
+    public static BooleanExpression withCompetitionId(Long id) {
         return QBet.bet.match.competition.id.eq(id);
     }
 }

@@ -15,16 +15,16 @@ public interface BetRepository extends JpaRepository<Bet, Long>, QueryDslPredica
     default Iterable<Bet> findByMatch(Long idMatch) {
         return findAll(withMatchId(idMatch));
     }
-
     default Boolean existsByMatchIdAndUserId(Long idMatch, Long idUser) {
         return exists(withMatchId(idMatch).and(withUserId(idUser)));
     }
-
     default Bet findByMatchIdAndUserId(Long matchId, Long userId) {
         return findOne(withMatchId(matchId).and(withUserId(userId)));
     }
-
-    default Iterable<Bet> findByUserAndCompetition(User user, Long competitionId) {
-        return findAll(withUserId(user.getId()).and(witchCompetitionId(competitionId)));
+    default Iterable<Bet> findByUserAndCompetitionId(User user, Long competitionId) {
+        return findAll(withUserId(user.getId()).and(withCompetitionId(competitionId)));
     };
+    default Iterable<Bet> findByCompetitionId(Long competitionId) {
+        return findAll(withCompetitionId(competitionId));
+    }
 }

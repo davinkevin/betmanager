@@ -7,6 +7,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 
+import static java.util.Objects.isNull;
+
 /**
  * Created by kevin on 11/08/15 for betmanager
  */
@@ -58,6 +60,15 @@ public class Bet {
     public Bet setUser(User user) {
         this.user = user;
         return this;
+    }
+
+    @Transient @JsonIgnore
+    public Boolean isValid() {
+        if (isNull(value) || isNull(match) || isNull(match.getResult())) {
+            return Boolean.FALSE;
+        }
+
+        return value == match.getResult();
     }
 
     @Override

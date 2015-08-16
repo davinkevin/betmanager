@@ -70,6 +70,6 @@ public class BetService {
     }
 
     public Iterable<Bet> findByUserAndCompetition(User user, Long competitionId) {
-        return betRepository.findByUserAndCompetition(user, competitionId);
+        return betRepository.findByUserAndCompetitionId(user, competitionId);
     }
 }
