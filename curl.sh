@@ -43,3 +43,13 @@ curl -i -X POST \
    "awayTeam" : {"id" : 2}
  }' \
   'http://localhost:8080/api/competitions/1/matchs'
+
+# Authentication :
+curl -b cookie.txt -c cookie.txt -s -i -X GET -H "Content-Type:application/json" -H "Authorization:Basic a2V2aW46a2V2aW4=" 'http://localhost:8080/api/users/me'; cat cookie.txt
+
+# Get LeaderBoard of first competition :
+curl -b cookie.txt -c cookie.txt -i -X GET \
+                                  -H "Content-Type:application/json" \
+                                  -H "X-XSRF-TOKEN:ca036556-5821-480e-b403-fa95a070d897" \
+                                  -H "X-Requested-With:XMLHttpRequest" \
+                                  'http://localhost:8080/api/competitions/1/leaderboard'

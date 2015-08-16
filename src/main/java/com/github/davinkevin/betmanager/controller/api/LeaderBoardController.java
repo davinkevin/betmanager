@@ -23,7 +23,7 @@ public class LeaderBoardController {
     }
 
     @RequestMapping
-    public Set<LeaderBoardResult> leaderBoard(@PathVariable Long competitionId) {
+    public Set<Object> leaderBoard(@PathVariable Long competitionId) {
         return leaderBoardService.leaderBoard(competitionId);
     }
 
