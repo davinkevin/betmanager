@@ -31,6 +31,11 @@ public class BetController {
         return betService.create(idMatch, bet, user);
     }
 
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    public Bet update(@PathVariable Long idMatch, @RequestBody Bet bet, @AuthenticationPrincipal User user) {
+        return betService.update(idMatch, bet, user);
+    }
+
     @RequestMapping(value = "{id}")
     public Bet findOne(@PathVariable Long id) {
         return betService.findOne(id);

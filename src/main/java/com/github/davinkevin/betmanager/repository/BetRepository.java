@@ -1,11 +1,11 @@
 package com.github.davinkevin.betmanager.repository;
 
 import com.github.davinkevin.betmanager.entity.Bet;
+import com.github.davinkevin.betmanager.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import static com.github.davinkevin.betmanager.repository.dsl.BetDSL.withMatchId;
-import static com.github.davinkevin.betmanager.repository.dsl.BetDSL.withUserId;
+import static com.github.davinkevin.betmanager.repository.dsl.BetDSL.*;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -23,4 +23,8 @@ public interface BetRepository extends JpaRepository<Bet, Long>, QueryDslPredica
     default Bet findByMatchIdAndUserId(Long matchId, Long userId) {
         return findOne(withMatchId(matchId).and(withUserId(userId)));
     }
+
+    default Iterable<Bet> findByUserAndCompetition(User user, Long competitionId) {
+        return findAll(withUserId(user.getId()).and(witchCompetitionId(competitionId)));
+    };
 }
