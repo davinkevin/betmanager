@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic()
         .and()
             .authorizeRequests()
-              .anyRequest().authenticated()
+                .anyRequest()
+                    .authenticated()
         .and()
             .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
             .userDetailsService(userDetailsService);
