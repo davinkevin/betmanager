@@ -1,5 +1,6 @@
 package com.github.davinkevin.betmanager;
 
+import com.github.davinkevin.betmanager.BetmanagerApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.web.WebAppConfiguration;

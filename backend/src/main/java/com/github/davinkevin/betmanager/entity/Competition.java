@@ -2,6 +2,8 @@ package com.github.davinkevin.betmanager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.davinkevin.betmanager.entity.Match;
+import com.github.davinkevin.betmanager.entity.Sport;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
