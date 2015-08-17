@@ -1,49 +1,42 @@
 package com.github.davinkevin.betmanager.dto;
 
 import com.github.davinkevin.betmanager.entity.Bet;
-import com.github.davinkevin.betmanager.entity.Match;
 import com.github.davinkevin.betmanager.entity.Result;
 
-import java.util.List;
+import java.util.stream.Collector;
+
+import static java.util.stream.Collectors.reducing;
 
 /**
  * Created by kevin on 16/08/15 for betmanager
  */
 public class Quote {
 
-    public static final Quote IDENTITY_QUOTE = new Quote();
-
-    final Match match;
     final Double one;
     final Double n;
     final Double two;
     final Double total;
 
     public Quote() {
-        match = null;
         one = 0d;
         n = 0d;
         two = 0d;
-        total = one + n + two;
+        total = 0d;
     }
 
-    public Quote(Match match, List<Bet> bets) {
-        this.match = match;
-        this.one = betWith(bets, Result.ONE);
-        this.n = betWith(bets, Result.N);
-        this.two = betWith(bets, Result.TWO);
+    public Quote(Double one, Double n, Double two) {
+        this.one = one;
+        this.n = n;
+        this.two = two;
         this.total = one + n + two;
     }
 
-    private static Double betWith(List<Bet> bets, Result two) {
-        return (double) bets
-                .stream()
-                .filter(bet -> bet.getValue().equals(two))
-                .count();
-    }
-
-    public Match match() {
-        return match;
+    public static Collector<Bet, ?, Quote> collectQuote() {
+        return reducing(
+                new Quote(),
+                bet -> new Quote( Result.ONE.equals(bet.getValue()) ? 1d : 0d, Result.N.equals(bet.getValue()) ? 1d : 0d, Result.TWO.equals(bet.getValue()) ? 1d : 0d ),
+                (a, b) -> new Quote(a.one+b.one, a.n+b.n, a.two+b.two)
+        );
     }
 
     public Double getResult(Result value) {
@@ -58,4 +51,6 @@ public class Quote {
                 return 0d;
         }
     }
+
+
 }
