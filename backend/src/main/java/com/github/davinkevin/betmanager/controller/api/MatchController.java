@@ -1,5 +1,6 @@
 package com.github.davinkevin.betmanager.controller.api;
 
+import com.github.davinkevin.betmanager.dto.Quote;
 import com.github.davinkevin.betmanager.entity.Match;
 import com.github.davinkevin.betmanager.service.MatchService;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,11 @@ public class MatchController {
     @RequestMapping(value = "{id}")
     public Match findOne(@PathVariable Long id) {
         return matchService.findOne(id);
+    }
+
+    @RequestMapping(value = "{id}/quote")
+    public Quote quote(@PathVariable Long id) {
+        return matchService.calculateQuote(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)

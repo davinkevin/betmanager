@@ -66,7 +66,7 @@ public class BetService {
     }
 
     public Iterable<Bet> findByMatch(Long idMatch) {
-        return betRepository.findByMatch(idMatch);
+        return betRepository.findByMatchId(idMatch);
     }
 
     public Iterable<Bet> findByUserAndCompetition(User user, Long competitionId) {

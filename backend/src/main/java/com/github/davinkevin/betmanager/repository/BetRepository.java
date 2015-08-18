@@ -12,8 +12,8 @@ import static com.github.davinkevin.betmanager.repository.dsl.BetDSL.*;
  */
 public interface BetRepository extends JpaRepository<Bet, Long>, QueryDslPredicateExecutor<Bet> {
 
-    default Iterable<Bet> findByMatch(Long idMatch) {
-        return findAll(withMatchId(idMatch));
+    default Iterable<Bet> findByMatchId(Long matchId) {
+        return findAll(withMatchId(matchId));
     }
     default Boolean existsByMatchIdAndUserId(Long idMatch, Long idUser) {
         return exists(withMatchId(idMatch).and(withUserId(idUser)));
