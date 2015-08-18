@@ -53,3 +53,12 @@ curl -b cookie.txt -c cookie.txt -i -X GET \
                                   -H "X-Requested-With:XMLHttpRequest" \
                                   'http://localhost:8080/api/competitions/1/leaderboard'
 
+# Get Quote of match :
+curl -i -X GET \
+   -H "Content-Type:application/json" \
+ 'http://localhost:8080/api/competitions/1/matchs/7/quote'
+
+# Get Score of current User
+curl -i -X GET \
+   -H "Content-Type:application/json" \
+ 'http://localhost:8080/api/users/me/score'

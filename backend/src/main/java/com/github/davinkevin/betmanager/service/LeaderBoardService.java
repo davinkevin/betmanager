@@ -23,23 +23,16 @@ import static java.util.stream.Collectors.toSet;
 public class LeaderBoardService {
 
     final BetRepository betRepository;
+    final MatchService matchService;
 
-    @Inject LeaderBoardService(BetRepository betRepository) {
+    @Inject LeaderBoardService(BetRepository betRepository, MatchService matchService) {
         this.betRepository = betRepository;
+        this.matchService = matchService;
     }
 
     public Set<Object> leaderBoard(Long competitionId) {
         Iterable<Bet> bets = betRepository.findByCompetitionId(competitionId);
-
-        Map<Match, Quote> quotes = StreamSupport
-                .stream(bets.spliterator(), false)
-                .filter(bet -> nonNull(bet.getMatch().getResult()))
-                .collect(
-                        groupingBy(
-                                Bet::getMatch,
-                                Quote.collectQuote()
-                        )
-                );
+        Map<Match, Quote> quotes = matchService.matchWithQuote(bets);
 
         return StreamSupport
                 .stream(bets.spliterator(), false)

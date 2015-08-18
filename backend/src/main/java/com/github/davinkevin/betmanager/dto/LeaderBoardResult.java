@@ -16,18 +16,11 @@ import java.util.Map;
 public class LeaderBoardResult {
 
     final String username;
-    final Long score;
-    final Double quotedScore;
+    final Score score;
 
     public LeaderBoardResult(User user, List<Bet> bets, Map<Match, Quote> quotes) {
         this.username = user.getUsername();
-        this.score = bets.stream().filter(Bet::isValid).count();
-
-        this.quotedScore = bets
-                .stream()
-                .filter(Bet::isValid)
-                .mapToDouble(bet -> quotes.get(bet.getMatch()).getResult(bet.getValue()))
-                .sum();
+        this.score = new Score(bets, quotes);
     }
 
 
@@ -38,11 +31,11 @@ public class LeaderBoardResult {
 
     @JsonProperty("score")
     public Long score() {
-        return score;
+        return score.score;
     }
 
     @JsonProperty("quotedScore")
     public Double quotedscore() {
-        return quotedScore;
+        return score.quotedScore;
     }
 }

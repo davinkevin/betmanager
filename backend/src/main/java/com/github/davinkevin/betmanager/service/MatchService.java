@@ -1,6 +1,7 @@
 package com.github.davinkevin.betmanager.service;
 
 import com.github.davinkevin.betmanager.dto.Quote;
+import com.github.davinkevin.betmanager.entity.Bet;
 import com.github.davinkevin.betmanager.entity.Competition;
 import com.github.davinkevin.betmanager.entity.Match;
 import com.github.davinkevin.betmanager.repository.BetRepository;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
+import java.util.Map;
 import java.util.stream.StreamSupport;
 
 import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -65,5 +68,17 @@ public class MatchService {
                 .filter(bet -> nonNull(bet.getMatch().getResult()))
                 .map(Quote::of)
                 .reduce(new Quote(), Quote::merge);
+    }
+
+    public Map<Match, Quote> matchWithQuote(Iterable<Bet> bets) {
+        return StreamSupport
+                .stream(bets.spliterator(), false)
+                .filter(bet -> nonNull(bet.getMatch().getResult()))
+                .collect(
+                        groupingBy(
+                                Bet::getMatch,
+                                Quote.collectQuote()
+                        )
+                );
     }
 }

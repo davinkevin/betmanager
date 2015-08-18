@@ -1,5 +1,6 @@
 package com.github.davinkevin.betmanager.service;
 
+import com.github.davinkevin.betmanager.dto.Score;
 import com.github.davinkevin.betmanager.entity.Bet;
 import com.github.davinkevin.betmanager.entity.Match;
 import com.github.davinkevin.betmanager.entity.User;
@@ -10,8 +11,11 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.stream.StreamSupport;
 
 import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by kevin on 15/08/15 for betmanager
@@ -21,10 +25,12 @@ public class BetService {
 
     final BetRepository betRepository;
     final MatchRepository matchRepository;
+    final MatchService matchService;
 
-    @Inject BetService(BetRepository betRepository, MatchRepository matchRepository) {
+    @Inject BetService(BetRepository betRepository, MatchRepository matchRepository, MatchService matchService) {
         this.betRepository = betRepository;
         this.matchRepository = matchRepository;
+        this.matchService = matchService;
     }
 
     public Bet findOne(Long aLong) {
@@ -71,5 +77,18 @@ public class BetService {
 
     public Iterable<Bet> findByUserAndCompetition(User user, Long competitionId) {
         return betRepository.findByUserAndCompetitionId(user, competitionId);
+    }
+
+    public Score calculateScore(User user) {
+        List<Bet> bets = StreamSupport
+                .stream(betRepository.findByUser(user).spliterator(), false)
+                .collect(toList());
+
+        List<Match> matches = bets
+                .stream()
+                .map(Bet::getMatch)
+                .collect(toList());
+
+        return new Score(bets, matchService.matchWithQuote(betRepository.findByMatchIn(matches)));
     }
 }
