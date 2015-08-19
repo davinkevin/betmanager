@@ -45,7 +45,7 @@ curl -i -X POST \
   'http://localhost:8080/api/competitions/1/matchs'
 
 # Authentication :
-curl -b cookie.txt -c cookie.txt -s -i -X GET -H "Content-Type:application/json" -H "Authorization:Basic a2V2aW46a2V2aW4=" 'http://localhost:8080/api/users/me'; cat cookie.txt
+curl -b cookie.txt -c cookie.txt -s -i -X GET -H "Content-Type:application/json" -H "Authorization:Basic a2RhdmluOmtkYXZpbg==" 'http://localhost:8080/api/users/me'; cat cookie.txt
 
 # Get LeaderBoard of first competition :
 curl -b cookie.txt -c cookie.txt -i -X GET \
