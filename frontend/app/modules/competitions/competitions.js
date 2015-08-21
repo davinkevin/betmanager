@@ -1,21 +1,8 @@
 
 class CompetitionController {
 
-    constructor(identityService, $location) {
+    constructor($location) {
         this.$location = $location;
-        this.identityService = identityService;
-        identityService
-            .me()
-            .then((user) => this.identity = user);
-    }
-
-    logout() {
-        return this
-        .identityService
-        .logout()
-        .finally(
-            () => this.$location.path('/login')
-        );
     }
 }
 

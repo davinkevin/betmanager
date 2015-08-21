@@ -2,15 +2,15 @@
 
 class IdentityService {
 
-    constructor(Restangular, $log, $q) {
+    constructor(Restangular, $q) {
         this.$q = $q;
-        this.$log = $log;
         this.Restangular = Restangular;
         this.route = {
             users : 'users',
             logout : 'logout'
         };
         this.identity = undefined;
+        this.me();
     }
 
     me() {
@@ -28,7 +28,6 @@ class IdentityService {
                 return this.identity;
             },
             (error) => {
-                this.$log.error(error);
                 return this.$q.reject(error);
             }
         );
@@ -45,7 +44,6 @@ class IdentityService {
                 return this.identity;
             },
             (error) => {
-                this.$log.error(error);
                 return this.$q.reject(error);
             }
         );
@@ -55,7 +53,6 @@ class IdentityService {
         return this.Restangular
             .one(this.route.logout)
             .post()
-            .catch( (error) => this.$log.error(error) )
             .finally( () => this.identity = undefined );
     }
 

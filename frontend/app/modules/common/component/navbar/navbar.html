@@ -1,0 +1,27 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div>
+            <a class="navbar-brand" href="/">Bet Manager</a>
+        </div>
+        <ul class="nav navbar-nav pull-right">
+            <li ng-show="navbar.identity.username">
+                <a href="/me">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="hidden-xs"> {{ navbar.identity.username }}</span>
+                </a>
+            </li>
+            <li ng-show="navbar.identity.username">
+                <a ng-click="navbar.logout()">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                    <span class="hidden-xs">Log-out</span>
+                </a>
+            </li>
+            <li ng-hide="navbar.identity.username">
+                <a ng-href="/login">
+                    <span class="glyphicon glyphicon-log-in"></span>
+                    <span class="hidden-xs">Log-in</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
