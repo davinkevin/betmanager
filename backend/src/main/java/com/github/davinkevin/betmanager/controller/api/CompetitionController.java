@@ -2,6 +2,7 @@ package com.github.davinkevin.betmanager.controller.api;
 
 import com.github.davinkevin.betmanager.entity.Competition;
 import com.github.davinkevin.betmanager.service.CompetitionService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/competitions")
+@PreAuthorize("isAuthenticated()")
 public class CompetitionController {
     final CompetitionService competitionService;
 

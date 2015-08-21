@@ -1,3 +1,17 @@
-<div class="container">
-<h2>List of Competitions !!</h2>
+
+<div class="container competitions-list">
+
+    <div class="row">
+        <div ng-repeat="competition in cc.competitions | orderBy:'-id' track by competition.id" class="competitions-in-list">
+
+            <div class="col-md-4 col-sm-6 competition-item">
+                <a ng-href="competitions/{{ competition.id }}">
+                    <img ng-src="{{ competition.urlLogo }}" class="img-responsive">
+                </a>
+                <div class="competition-caption">
+                    <h4><a ng-href="competitions/{{ competition.id }}">{{ competition.name }}</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

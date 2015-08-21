@@ -4,6 +4,7 @@ class LoginController {
     constructor(identityService, $location) {
         this.$location = $location;
         this.identityService = identityService;
+        this.credentials = {};
         identityService
             .me()
             .then(
@@ -30,7 +31,7 @@ class LoginController {
 }
 
 angular.module('bm.login', [
-    'bm.common.identityService',
+    'bm.common.dataService.identityService',
     'ngRoute'
 ]).config(($routeProvider) => {
     $routeProvider.

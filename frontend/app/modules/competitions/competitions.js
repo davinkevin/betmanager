@@ -1,12 +1,18 @@
 
 class CompetitionController {
 
-    constructor($location) {
+    constructor(competitionService, $location) {
+        this.competitionService = competitionService;
         this.$location = $location;
+
+        this.competitionService
+            .findAll()
+            .then((competitions) => this.competitions = competitions);
     }
 }
 
 angular.module('bm.competitions', [
+    'bm.common.dataService.competitionService',
     'ngRoute'
 ]).config(($routeProvider) => {
     $routeProvider.

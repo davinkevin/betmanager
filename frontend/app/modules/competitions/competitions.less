@@ -1,0 +1,42 @@
+/*@import "../common/component/theme/variables.less";*/
+@import "../common/component/theme/mixins.less";
+
+.competition-item {
+  margin: 0 0 15px;
+  right: 0;
+  .competition-link {
+    display: block;
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .competition-caption {
+    //max-width: 400px;
+    margin: 0 auto;
+    background-color: white;
+    text-align: center;
+    padding: 25px;
+    h4 {
+      text-transform: none;
+      margin: 0;
+      a {
+        color: #000;
+        &:hover {
+          text-decoration : none;
+        }
+      }
+    }
+    p {
+      .serif-font;
+      font-style: italic;
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+}
+
+@media(min-width:767px) {
+  .competition-item {
+    margin: 0 0 30px;
+  }
+}

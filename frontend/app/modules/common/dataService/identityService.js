@@ -58,7 +58,7 @@ class IdentityService {
 
 }
 
-angular.module('bm.common.identityService', [
+angular.module('bm.common.dataService.identityService', [
     'restangular'
 ])
     .service('identityService', IdentityService);
