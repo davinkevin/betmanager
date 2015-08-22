@@ -1,25 +1,26 @@
 
-class CompetitionController {
-
-    constructor(competitionService, $location) {
-        this.competitionService = competitionService;
-        this.$location = $location;
-
-        this.competitionService
-            .findAll()
-            .then((competitions) => this.competitions = competitions);
+class CompetitionsController {
+    constructor(competitions) {
+        this.competitions = competitions;
     }
+}
+
+function competitionsRouteConfig($routeProvider) {
+    return $routeProvider.
+        when('/', {
+            templateUrl: 'competitions/competitions.html',
+            controller: 'CompetitionsController',
+            controllerAs: 'cc',
+            resolve : {
+                competitions : (competitionService) => competitionService.findAll()
+            }
+        });
 }
 
 angular.module('bm.competitions', [
     'bm.common.dataService.competitionService',
+    'bm.competitions.competition',
     'ngRoute'
-]).config(($routeProvider) => {
-    $routeProvider.
-        when('/', {
-            templateUrl: 'competitions/competitions.html',
-            controller: 'CompetitionController',
-            controllerAs: 'cc'
-        });
-})
-    .controller('CompetitionController', CompetitionController);
+])
+    .config(competitionsRouteConfig)
+    .controller('CompetitionsController', CompetitionsController);

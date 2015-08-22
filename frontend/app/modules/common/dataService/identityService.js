@@ -32,7 +32,6 @@ class IdentityService {
             }
         );
     }
-
     login(login, password) {
         return this.Restangular
             .one(this.route.users)
@@ -48,14 +47,12 @@ class IdentityService {
             }
         );
     }
-
     logout() {
         return this.Restangular
             .one(this.route.logout)
             .post()
             .finally( () => this.identity = undefined );
     }
-
 }
 
 angular.module('bm.common.dataService.identityService', [

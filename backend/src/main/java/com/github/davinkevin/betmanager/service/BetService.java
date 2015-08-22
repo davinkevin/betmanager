@@ -45,7 +45,7 @@ public class BetService {
 
         Match match = matchRepository.findOne(matchId);
 
-        if (match.getDate().isAfter(ZonedDateTime.now())) {
+        if (match.getDate().isBefore(ZonedDateTime.now())) {
             throw new BetAfterMatchBeginningNotAllowedException();
         }
 

@@ -15,7 +15,7 @@ hs_err_pid*
 *.iml
 .idea
 
-
+frontend/app/img/
 bower_components
 node_modules
 /frontend/app/lib

@@ -12,7 +12,7 @@ import javax.inject.Inject;
  * Created by kevin on 15/08/15 for betmanager
  */
 @RestController
-@RequestMapping("/api/competitions/{idCompetition}/matchs/{idMatch}/bets")
+@RequestMapping("/api/competitions/{idCompetition}/matches/{idMatch}/bets")
 public class BetController {
 
     final BetService betService;

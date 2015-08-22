@@ -2,12 +2,14 @@ package com.github.davinkevin.betmanager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -93,5 +95,10 @@ public class Bet {
                 .append(match)
                 .append(user)
                 .toHashCode();
+    }
+
+    @Transient @JsonProperty("matchId")
+    public Long getMatchId() {
+        return nonNull(match) ? match.getId() : null;
     }
 }

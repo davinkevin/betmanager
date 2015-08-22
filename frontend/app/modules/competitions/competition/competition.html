@@ -1,0 +1,17 @@
+<div class="container">
+
+    <h2>{{ cc.competition.name }}</h2>
+
+    <tabset>
+        <tab heading="Future Bets">
+            <future-bet competition="cc.competition" bets="cc.bets"></future-bet>
+        </tab>
+        <tab heading="Past Bets">
+            <past-bet competition="cc.competition"></past-bet>
+        </tab>
+        <tab heading="LeaderBoard">
+            <competition-leaderboard competition="cc.competition"></competition-leaderboard>
+        </tab>
+    </tabset>
+
+</div>

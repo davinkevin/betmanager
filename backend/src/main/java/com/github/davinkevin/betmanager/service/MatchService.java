@@ -1,9 +1,11 @@
 package com.github.davinkevin.betmanager.service;
 
+import com.github.davinkevin.betmanager.dto.MatchWithUserBet;
 import com.github.davinkevin.betmanager.dto.Quote;
 import com.github.davinkevin.betmanager.entity.Bet;
 import com.github.davinkevin.betmanager.entity.Competition;
 import com.github.davinkevin.betmanager.entity.Match;
+import com.github.davinkevin.betmanager.entity.User;
 import com.github.davinkevin.betmanager.repository.BetRepository;
 import com.github.davinkevin.betmanager.repository.CompetitionRepository;
 import com.github.davinkevin.betmanager.repository.MatchRepository;
@@ -12,10 +14,12 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.time.ZonedDateTime;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * Created by kevin on 11/08/15 for betmanager
@@ -55,12 +59,21 @@ public class MatchService {
         matchRepository.delete(id);
     }
 
-    public Iterable<Match> findByCompetitionAndDateBefore(Long idCompetition, ZonedDateTime date) {
-        return matchRepository.findByCompetitionAndDateBefore(idCompetition, date);
+    public Iterable<MatchWithUserBet> findAllInPastWithUserBet(Long idCompetition, ZonedDateTime date, User user) {
+        Iterable<Match> pastMatches = matchRepository.findByCompetitionAndDateBefore(idCompetition, date);
+        return attachBetFromUser(pastMatches, user);
     }
 
-    public Iterable<Match> findByCompetitionAndDateAfter(Long idCompetition, ZonedDateTime date) {
-        return matchRepository.findByCompetitionAndDateAfter(idCompetition, date);
+    private Set<MatchWithUserBet> attachBetFromUser(Iterable<Match> pastMatches, User user) {
+        return StreamSupport
+                .stream(pastMatches.spliterator(), false)
+                .map(match -> new MatchWithUserBet(match, betRepository.findByMatchIdAndUserId(match.getId(), user.getId())))
+                .collect(toSet());
+    }
+
+    public Iterable<MatchWithUserBet> findAllInFutureWithUserBet(Long idCompetition, ZonedDateTime date, User user) {
+        Iterable<Match> futureMatches = matchRepository.findByCompetitionAndDateAfter(idCompetition, date);
+        return attachBetFromUser(futureMatches, user);
     }
 
     public Quote calculateQuote(Long matchId) {
