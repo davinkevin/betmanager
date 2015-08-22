@@ -11,6 +11,12 @@ class LeaderBoardService {
             .one('leaderboard')
             .get();
     }
+
+    leaderBoard() {
+        return this.restangular
+            .one('leaderboard')
+            .get();
+    }
 }
 
 

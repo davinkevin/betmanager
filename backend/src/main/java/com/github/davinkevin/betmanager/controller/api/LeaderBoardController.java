@@ -13,7 +13,7 @@ import java.util.Set;
  * Created by kevin on 16/08/15 for betmanager
  */
 @RestController
-@RequestMapping("/api/competitions/{competitionId}/leaderboard")
+@RequestMapping("/api")
 public class LeaderBoardController {
 
     final LeaderBoardService leaderBoardService;
@@ -22,9 +22,14 @@ public class LeaderBoardController {
         this.leaderBoardService = leaderBoardService;
     }
 
-    @RequestMapping
-    public Set<Object> leaderBoard(@PathVariable Long competitionId) {
+    @RequestMapping("competitions/{competitionId}/leaderboard")
+    public Set<LeaderBoardResult> leaderBoard(@PathVariable Long competitionId) {
         return leaderBoardService.leaderBoard(competitionId);
+    }
+
+    @RequestMapping("leaderboard")
+    public Set<LeaderBoardResult> leaderBoard() {
+        return leaderBoardService.leaderBoard();
     }
 
 }

@@ -8,6 +8,7 @@ import com.github.davinkevin.betmanager.repository.BetRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.StreamSupport;
@@ -30,12 +31,25 @@ public class LeaderBoardService {
         this.matchService = matchService;
     }
 
-    public Set<Object> leaderBoard(Long competitionId) {
+    public Set<LeaderBoardResult> leaderBoard(Long competitionId) {
         Iterable<Bet> bets = betRepository.findByCompetitionId(competitionId);
         Map<Match, Quote> quotes = matchService.matchWithQuote(bets);
 
         return StreamSupport
                 .stream(bets.spliterator(), false)
+                .filter(bet -> nonNull(bet.getMatch().getResult()))
+                .collect(groupingBy(Bet::getUser))
+                .entrySet()
+                .stream()
+                .map(tuple -> new LeaderBoardResult(tuple.getKey(), tuple.getValue(), quotes))
+                .collect(toSet());
+    }
+
+    public Set<LeaderBoardResult> leaderBoard() {
+        List<Bet> bets = betRepository.findAll();
+        Map<Match, Quote> quotes = matchService.matchWithQuote(bets);
+
+        return bets.stream()
                 .filter(bet -> nonNull(bet.getMatch().getResult()))
                 .collect(groupingBy(Bet::getUser))
                 .entrySet()
