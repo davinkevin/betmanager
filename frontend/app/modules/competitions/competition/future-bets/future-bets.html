@@ -1,20 +1,20 @@
 <div class="future-matches">
     <div ng-repeat="match in fbc.matches" class="match" ng-class="{}">
-        <div class="col-lg-4 col-sm-4 col-xs-4 col-md-4 col-lg-offset-1 text-right clearfix">
+        <div class="col-lg-4 col-sm-4 col-xs-3 col-md-4 col-lg-offset-1 text-right clearfix">
             <span class="localteam">
                 <img ng-src="{{ match.localTeam.flag }}" class="pull-right" />
                 <label class="col-xs-6 pull-right text-center">{{ match.localTeam.name }}</label>
             </span>
         </div>
 
-        <div class="col-lg-2 col-sm-4 col-xs-4 col-md-3 text-center betvalue">
+        <div class="col-lg-2 col-sm-4 col-xs-5 col-md-3 text-center betvalue">
             <bet-selector match="match" bet="match.bet"></bet-selector>
             <div>
-                <h5>{{ match.date | date : 'EEEE, MMMM d, y à H:mm'}}</h5>
+                <h5>{{ match.date | date : 'd MMMM y H:mm'}}</h5>
             </div>
         </div>
 
-        <div class="col-lg-4 col-sm-4 col-xs-4 text-left">
+        <div class="col-lg-4 col-sm-4 col-xs-3 text-left">
             <span class="awayteam">
                 <img ng-src="{{ match.awayTeam.flag }}" class="pull-left"/>
                 <label class="col-xs-6 pull-left text-center">{{ match.awayTeam.name }}</label>
