@@ -22,6 +22,7 @@ function competitionRouteConfig($routeProvider) {
 angular.module('bm.competitions.competition', [
     'bm.competitions.competition.future-bets',
     'bm.competitions.competition.past-bets',
+    'bm.competitions.competition.leader-board',
     'ngRoute'
 ])
     .config(competitionRouteConfig)
