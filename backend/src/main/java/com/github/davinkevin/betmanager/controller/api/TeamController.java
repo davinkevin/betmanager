@@ -19,8 +19,6 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-
-
     @RequestMapping(value = "{id}")
     public Team findOne(@PathVariable Long id) {
         return teamService.findOne(id);
@@ -39,5 +37,10 @@ public class TeamController {
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
         teamService.delete(id);
+    }
+
+    @RequestMapping(value = "findByName")
+    public Iterable<Team> findByName(@RequestParam(value = "name", defaultValue = "") String name) {
+        return teamService.findByName(name);
     }
 }

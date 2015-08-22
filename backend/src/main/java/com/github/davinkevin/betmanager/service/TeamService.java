@@ -32,4 +32,7 @@ public class TeamService {
     }
 
 
+    public Iterable<Team> findByName(String name) {
+        return teamRepository.findByName(name);
+    }
 }

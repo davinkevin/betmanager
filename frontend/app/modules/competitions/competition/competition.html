@@ -15,6 +15,9 @@
         <tab heading="Score Admin" ng-if="cc.identityService.hasRole('ADMIN')">
             <score-admin competition="cc.competition"></score-admin>
         </tab>
+        <tab heading="Add Match" ng-if="cc.identityService.hasRole('ADMIN')">
+            <add-match competition="cc.competition"></add-match>
+        </tab>
     </tabset>
 
 </div>

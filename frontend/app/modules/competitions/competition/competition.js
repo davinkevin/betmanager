@@ -25,6 +25,7 @@ angular.module('bm.competitions.competition', [
     'bm.competitions.competition.past-bets',
     'bm.competitions.competition.leader-board',
     'bm.competitions.competition.score-admin',
+    'bm.competitions.competition.add-match',
     'bm.common.dataService.identityService',
     'ngRoute'
 ])

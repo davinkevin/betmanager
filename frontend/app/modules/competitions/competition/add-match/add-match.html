@@ -1,0 +1,31 @@
+<div>
+    <h4>Add a new match in the current Competition</h4>
+    <div class="bet">
+        <div class="col-lg-3 col-lg-offset-1">
+            <div class="col-lg-offset-2 col-lg-7 ">
+                <input type="text"
+                       ng-model="amc.newMatch.localTeam"
+                       placeholder="Local Team"
+                       typeahead="team as team.name for team in amc.findByName($viewValue)"
+                       typeahead-template-url="competitions/competition/add-match/typeahead.html" class="form-control text-right">
+            </div>
+            <img class="col-lg-3" ng-src="{{ amc.newMatch.localTeam.flag }}" />
+        </div>
+        <div class="col-lg-3" >
+            <img class="col-lg-3" ng-src="{{ amc.newMatch.awayTeam.flag }}" />
+            <div class="col-lg-7">
+                <input type="text"
+                       ng-model="amc.newMatch.awayTeam"
+                       placeholder="Away Team"
+                       typeahead="team as team.name for team in amc.findByName($viewValue)"
+                       typeahead-template-url="competitions/competition/add-match/typeahead.html" class="form-control text-left">
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <input ng-model="amc.newMatch.stringDate" class="form-control" type="datetime-local" placeholder="YYYY-MM-DDTHH:MM:SS" />
+        </div>
+        <div class="col-lg-1">
+            <a class="btn btn-primary" ng-click="createMatch()">Save</a>
+        </div>
+    </div>
+</div>
