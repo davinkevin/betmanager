@@ -12,6 +12,9 @@
         <tab heading="Leader Board">
             <leader-board competition="cc.competition"></leader-board>
         </tab>
+        <tab heading="Score Admin" ng-if="cc.identityService.hasRole('ADMIN')">
+            <score-admin competition="cc.competition"></score-admin>
+        </tab>
     </tabset>
 
 </div>

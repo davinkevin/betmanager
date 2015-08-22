@@ -55,8 +55,8 @@ public class MatchController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public Match update(@RequestBody Match match) {
-        return matchService.save(match);
+    public Match update(@PathVariable Long idCompetition, @RequestBody Match match) {
+        return matchService.save(idCompetition, match);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)

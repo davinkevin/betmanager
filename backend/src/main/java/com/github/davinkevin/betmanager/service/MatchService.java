@@ -38,10 +38,6 @@ public class MatchService {
         return matchRepository.findByCompetition(idCompetition);
     }
 
-    public Match save(Match match) {
-        return matchRepository.save(match);
-    }
-
     public Match save(Long idCompetition, Match match) {
         Competition competition = competitionRepository.findOne(idCompetition);
         return matchRepository.save(match.setCompetition(competition));

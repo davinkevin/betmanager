@@ -8,8 +8,7 @@ class PastBetsDirective {
         this.controller = 'PastBetsController';
         this.controllerAs = 'pbc';
         this.bindToController = {
-            competition : '=',
-            bets : '='
+            competition : '='
         };
     }
 }

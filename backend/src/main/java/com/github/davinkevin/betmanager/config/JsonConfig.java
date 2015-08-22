@@ -1,5 +1,6 @@
 package com.github.davinkevin.betmanager.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -21,8 +22,10 @@ public class JsonConfig {
     private ObjectMapper customObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-        objectMapper.configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
+        objectMapper
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true)
+                .configure(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false)
+                .configure(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false);
 
         return objectMapper;
     }

@@ -53,6 +53,14 @@ class IdentityService {
             .post()
             .finally( () => this.identity = undefined );
     }
+
+    hasRole(role) {
+        if (!this.identity) {
+            return false;
+        }
+
+        return _.findIndex(this.identity.roles, 'name', role) > -1;
+    }
 }
 
 angular.module('bm.common.dataService.identityService', [

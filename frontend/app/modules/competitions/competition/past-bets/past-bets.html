@@ -10,7 +10,13 @@
         <div class="col-lg-2 col-sm-4 col-xs-5 col-md-3 text-center betvalue">
             <bet-selector match="match" bet="match.bet" disabled="true"></bet-selector>
             <div>
-                <h5>{{ match.date | date : 'd MMMM y H:mm'}} <span ng-show="match.bet.value !== 'ONE' && match.bet.value !== 'N' && match.bet.value !== 'TWO'"> | Not bet</span></h5>
+                <h5>
+                    {{ match.date | date : 'd MMMM y H:mm'}}
+                    <div>
+                        {{match.localScore}} - {{match.awayScore}}
+                    </div>
+                    <span ng-show="match.bet.value !== 'ONE' && match.bet.value !== 'N' && match.bet.value !== 'TWO'"> | Not bet</span>
+                </h5>
             </div>
 
         </div>

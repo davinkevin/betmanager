@@ -16,6 +16,15 @@ class MatchService {
             .getList();
     }
 
+    findAll(competition) {
+        return this.$$matches(competition)
+            .getList();
+    }
+
+    save(match) {
+        return match.put();
+    }
+
     $$matches(competition) {
         return this.restangular
             .one('competitions', competition.id)
