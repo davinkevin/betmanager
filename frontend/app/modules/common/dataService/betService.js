@@ -5,6 +5,15 @@ class BetService {
     }
 
     save(match, bet) {
+
+        if (!bet.id) {
+            return this.parentWith(match).post('bets', bet);
+        }
+
+        if (!bet.value) {
+            return this.parentWith(match).one('bets', bet.id).remove();
+        }
+
         return this.restangular
             .restangularizeElement(this.parentWith(match), bet, 'bets')
             .put();

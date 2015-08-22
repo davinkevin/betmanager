@@ -22,14 +22,15 @@ class BetSelectorController {
 
     buttonStyle(val) {
         return {
-            'btn-default' : this.bet.value === val,
-            'btn-primary' : this.bet.value !== val
+            'btn-default' : this.bet != null && this.bet.value === val,
+            'btn-primary' : this.bet == null || this.bet.value !== val
         };
     }
 
     onChange() {
         return this.betService
-                .save(this.match, this.bet);
+                .save(this.match, this.bet)
+                .then(bet => this.bet = bet);
     }
 }
 
