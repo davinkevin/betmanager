@@ -4,7 +4,13 @@
             <a class="navbar-brand" href="/">Bet Manager</a>
         </div>
         <ul class="nav navbar-nav pull-right">
-            <li>
+            <li ng-class="{ active: navbar.isActive('/competitions|^/$') }">
+                <a href="/">
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="hidden-xs">Competitions</span>
+                </a>
+            </li>
+            <li ng-class="{ active: navbar.isActive('/leader-board') }">
                 <a href="/leader-board">
                     <span class="glyphicon glyphicon-th-list"></span>
                     <span class="hidden-xs">Leader-Board</span>
@@ -22,7 +28,7 @@
                     <span class="hidden-xs">Log-out</span>
                 </a>
             </li>
-            <li ng-hide="navbar.identity.username">
+            <li ng-hide="navbar.identity.username" ng-class="{ active: navbar.isActive('/login') }">
                 <a ng-href="/login">
                     <span class="glyphicon glyphicon-log-in"></span>
                     <span class="hidden-xs">Log-in</span>

@@ -12,6 +12,10 @@ class NavBarController {
         );
     }
 
+    isActive(url) {
+        return new RegExp(url).test(this.$location.path());
+    }
+
     logout() {
         return this
             .identityService
