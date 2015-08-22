@@ -19,7 +19,7 @@ class MatchService {
     $$matches(competition) {
         return this.restangular
             .one('competitions', competition.id)
-            .all('matches')
+            .all('matches');
     }
 }
 

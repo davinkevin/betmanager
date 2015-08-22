@@ -24,16 +24,16 @@ class BetSelectorController {
     buttonStyle(val) {
         if (this.match.result === 'NONE') {
             return {
-                'btn-default' : this.bet != null && this.bet.value === val,
-                'btn-primary' : this.bet == null || this.bet.value !== val
+                'btn-default' : this.bet !== null && this.bet.value === val,
+                'btn-primary' : this.bet === null || this.bet.value !== val
             };
         }
 
         return {
-            'btn-success' : this.match.result == val,
-            'btn-danger' : this.bet.value == val && val != this.match.result,
-            'btn-primary' : !(this.match.result == val) && !(this.bet.value == val && val != this.match.result)
-        }
+            'btn-success' : this.match.result === val,
+            'btn-danger' : this.bet.value === val && val !== this.match.result,
+            'btn-primary' : (this.match.result !== val) && !(this.bet.value === val && val !== this.match.result)
+        };
     }
 
     onChange() {
