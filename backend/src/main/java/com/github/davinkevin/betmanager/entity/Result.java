@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  * Created by kevin on 11/08/15 for betmanager
  */
 public enum Result {
-    ONE, N, TWO;
+    ONE, N, TWO, NONE;
 
     @JsonCreator
     public static Result of(String value) {

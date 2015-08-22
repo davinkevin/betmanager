@@ -8,8 +8,7 @@ class FutureBetsDirective {
         this.controller = 'FutureBetsController';
         this.controllerAs = 'fbc';
         this.bindToController = {
-            competition : '=',
-            bets : '='
+            competition : '='
         };
     }
 }

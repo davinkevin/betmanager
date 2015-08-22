@@ -64,7 +64,7 @@ public class BetService {
     public Bet update(Long matchId, Bet bet, User user) {
         Bet betToUpdate = betRepository.findByMatchIdAndUserId(matchId, user.getId());
 
-        if (nonNull(bet.getMatch()) && bet.getMatch().getDate().isAfter(ZonedDateTime.now())) {
+        if (nonNull(betToUpdate.getMatch()) && betToUpdate.getMatch().getDate().isBefore(ZonedDateTime.now())) {
             throw new BetAfterMatchBeginningNotAllowedException();
         }
 

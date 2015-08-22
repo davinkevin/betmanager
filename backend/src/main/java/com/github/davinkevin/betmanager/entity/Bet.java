@@ -73,6 +73,15 @@ public class Bet {
         return value == match.getResult();
     }
 
+    @Transient @JsonIgnore
+    public Boolean hasValue() {
+        if (isNull(match) || match.getResult() == Result.NONE) {
+            return Boolean.FALSE;
+        }
+
+        return Boolean.TRUE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

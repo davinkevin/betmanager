@@ -2,10 +2,7 @@ package com.github.davinkevin.betmanager.service;
 
 import com.github.davinkevin.betmanager.dto.MatchWithUserBet;
 import com.github.davinkevin.betmanager.dto.Quote;
-import com.github.davinkevin.betmanager.entity.Bet;
-import com.github.davinkevin.betmanager.entity.Competition;
-import com.github.davinkevin.betmanager.entity.Match;
-import com.github.davinkevin.betmanager.entity.User;
+import com.github.davinkevin.betmanager.entity.*;
 import com.github.davinkevin.betmanager.repository.BetRepository;
 import com.github.davinkevin.betmanager.repository.CompetitionRepository;
 import com.github.davinkevin.betmanager.repository.MatchRepository;
@@ -17,7 +14,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toSet;
 
@@ -78,7 +74,7 @@ public class MatchService {
 
     public Quote calculateQuote(Long matchId) {
         return StreamSupport.stream(betRepository.findByMatchId(matchId).spliterator(), false)
-                .filter(bet -> nonNull(bet.getMatch().getResult()))
+                .filter(Bet::hasValue)
                 .map(Quote::of)
                 .reduce(new Quote(), Quote::merge);
     }
@@ -86,7 +82,7 @@ public class MatchService {
     public Map<Match, Quote> matchWithQuote(Iterable<Bet> bets) {
         return StreamSupport
                 .stream(bets.spliterator(), false)
-                .filter(bet -> nonNull(bet.getMatch().getResult()))
+                .filter(Bet::hasValue)
                 .collect(
                         groupingBy(
                                 Bet::getMatch,
