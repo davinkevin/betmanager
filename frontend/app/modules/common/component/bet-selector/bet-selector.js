@@ -29,6 +29,13 @@ class BetSelectorController {
             };
         }
 
+        if (!this.bet) {
+            return {
+                'btn-success' : this.match.result === val,
+                'btn-primary' : this.match.result !== val
+            }
+        }
+
         return {
             'btn-success' : this.match.result === val,
             'btn-danger' : this.bet.value === val && val !== this.match.result,

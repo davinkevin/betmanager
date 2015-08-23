@@ -2,7 +2,6 @@ package com.github.davinkevin.betmanager.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.davinkevin.betmanager.entity.Team;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -22,7 +21,7 @@ public class Match {
     private ZonedDateTime date;
     private Integer localScore;
     private Integer awayScore;
-    private Result result;
+    private Result result = Result.NONE;
     private Competition competition;
 
     @Id

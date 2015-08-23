@@ -1,31 +1,54 @@
-<div>
+<div class="add-match">
     <h4>Add a new match in the current Competition</h4>
-    <div class="bet">
-        <div class="col-lg-3 col-lg-offset-1">
-            <div class="col-lg-offset-2 col-lg-7 ">
-                <input type="text"
-                       ng-model="amc.newMatch.localTeam"
-                       placeholder="Local Team"
-                       typeahead="team as team.name for team in amc.findByName($viewValue)"
-                       typeahead-template-url="competitions/competition/add-match/typeahead.html" class="form-control text-right">
-            </div>
-            <img class="col-lg-3" ng-src="{{ amc.newMatch.localTeam.flag }}" />
+    <div class="row">
+
+        <div class="col-lg-4 col-sm-4 col-xs-4 col-md-4 clearfix">
+            <span class="localteam">
+                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <input type="text"
+                           ng-model="amc.newMatch.localTeam"
+                           placeholder="Local Team"
+                           typeahead="team as team.name for team in amc.findByName($viewValue)"
+                           typeahead-template-url="competitions/competition/add-match/typeahead.html"
+                           class="text-right form-control">
+                </span>
+                <img ng-src="{{ amc.newMatch.localTeam.flag }}" />
+            </span>
         </div>
-        <div class="col-lg-3" >
-            <img class="col-lg-3" ng-src="{{ amc.newMatch.awayTeam.flag }}" />
-            <div class="col-lg-7">
-                <input type="text"
-                       ng-model="amc.newMatch.awayTeam"
-                       placeholder="Away Team"
-                       typeahead="team as team.name for team in amc.findByName($viewValue)"
-                       typeahead-template-url="competitions/competition/add-match/typeahead.html" class="form-control text-left">
-            </div>
+
+        <div class="col-lg-4 col-sm-4 col-xs-4 col-md-4">
+            <!--<div>
+                <p class="input-group">
+                  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="amc.opened" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="amc.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+            </div>-->
+            <input ng-model="amc.newMatch.date" class="form-control" type="datetime-local" placeholder="YYYY-MM-DDTHH:MM:SS" />
         </div>
-        <div class="col-lg-3">
-            <input ng-model="amc.newMatch.stringDate" class="form-control" type="datetime-local" placeholder="YYYY-MM-DDTHH:MM:SS" />
-        </div>
-        <div class="col-lg-1">
-            <a class="btn btn-primary" ng-click="createMatch()">Save</a>
+
+        <div class="col-lg-4 col-sm-4 col-xs-4 col-md-4 clearfix">
+            <span class="awayTeam">
+                <img ng-src="{{ amc.newMatch.awayTeam.flag }}" class="pull-left"/>
+                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <input type="text"
+                           ng-model="amc.newMatch.awayTeam"
+                           placeholder="Away Team"
+                           typeahead="team as team.name for team in amc.findByName($viewValue)"
+                           typeahead-template-url="competitions/competition/add-match/typeahead.html"
+                           class="form-control text-left">
+                </span>
+            </span>
         </div>
     </div>
+
+    <div class="button-row">
+        <div class="col-lg-3 pull-right">
+            <a class="btn btn-primary" ng-click="amc.save()">Save</a>
+        </div>
+    </div>
+        <!--        <div class="col-lg-1">
+                    <a class="btn btn-primary" ng-click="createMatch()">Save</a>
+                </div>-->
 </div>

@@ -22,6 +22,12 @@ class MatchService {
     }
 
     save(match) {
+        if (!match.id) {
+            return this.restangular
+                .restangularizeElement(this.$$withCompetition(match.competition), match, 'matches')
+                .post();
+        }
+
         return match.put();
     }
 
@@ -29,6 +35,11 @@ class MatchService {
         return this.restangular
             .one('competitions', competition.id)
             .all('matches');
+    }
+
+    $$withCompetition(competition) {
+        return this.restangular
+            .one('competitions', competition.id);
     }
 }
 

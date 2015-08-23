@@ -14,12 +14,28 @@ class AddMatchDirective {
 }
 
 class AddMatchController {
-    constructor(teamService) {
+    constructor(teamService, matchService) {
         this.teamService = teamService;
+        this.matchService = matchService;
+        this.newMatch = {
+            date : new Date(),
+            competition : this.competition
+        };
     }
 
-    onSave(match) {
+    open() {
+        this.opened = true;
+    }
 
+    /*
+    onChangeDate() {
+        var gmtDate = new Date(this.newMatch.stringDate);
+        this.newMatch.date = new Date(gmtDate.valueOf() + gmtDate.getTimezoneOffset() * 60000);
+    }*/
+
+    save() {
+        return this.matchService
+            .save(this.newMatch);
     }
 
     findByName(value) {
