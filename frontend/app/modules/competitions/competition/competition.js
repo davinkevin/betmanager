@@ -1,9 +1,14 @@
 
 class CompetitionController {
 
-    constructor(competition, identityService) {
+    constructor(competition, identityService, $scope) {
         this.competition = competition;
         this.identityService = identityService;
+        this.$scope = $scope;
+    }
+
+    load(scope) {
+        this.$scope.$broadcast('competition:' + this.competition.id + ':' + scope);
     }
 }
 

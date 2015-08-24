@@ -15,9 +15,13 @@ class FutureBetsDirective {
 
 class FutureBetsController {
 
-    constructor(matchService) {
+    constructor(matchService, $scope) {
         this.matchService = matchService;
 
+        $scope.$on('competition:'+ this.competition.id + ':future', () => this.loadMatches());
+    }
+
+    loadMatches() {
         this.matchService
             .findAllFuture(this.competition)
             .then((matches) => this.matches = matches);

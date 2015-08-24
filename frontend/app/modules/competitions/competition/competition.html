@@ -3,16 +3,16 @@
     <h2>{{ cc.competition.name }}</h2>
 
     <tabset>
-        <tab heading="Future Bets">
+        <tab heading="Future Bets" select="cc.load('future')">
             <future-bet competition="cc.competition"></future-bet>
         </tab>
-        <tab heading="Past Bets">
+        <tab heading="Past Bets" select="cc.load('past')">
             <past-bet competition="cc.competition"></past-bet>
         </tab>
-        <tab heading="Leader Board">
+        <tab heading="Leader Board" select="cc.load('leader-board')">
             <leader-board competition="cc.competition"></leader-board>
         </tab>
-        <tab heading="Score Admin" ng-if="cc.identityService.hasRole('ADMIN')">
+        <tab heading="Score Admin" ng-if="cc.identityService.hasRole('ADMIN')" select="cc.load('score-admin')">
             <score-admin competition="cc.competition"></score-admin>
         </tab>
         <tab heading="Add Match" ng-if="cc.identityService.hasRole('ADMIN')">
