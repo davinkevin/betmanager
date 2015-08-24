@@ -15,10 +15,14 @@ class PastBetsDirective {
 
 class PastBetsController {
 
-    constructor(matchService) {
+    constructor(matchService, $scope) {
         this.matchService = matchService;
 
-        this.matchService
+        $scope.$on('competition:'+ this.competition.id + ':past', () => this.loadMatches());
+    }
+
+    loadMatches() {
+        return this.matchService
             .findAllPast(this.competition)
             .then((matches) => this.matches = matches);
     }
