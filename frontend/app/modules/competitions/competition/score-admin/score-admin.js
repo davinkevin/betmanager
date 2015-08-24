@@ -15,10 +15,14 @@ class ScoreAdminDirective {
 }
 
 class ScoreAdminController {
-    constructor(matchService) {
+    constructor(matchService, $scope) {
         this.matchService = matchService;
 
-        this.matchService
+        $scope.$on('competition:'+ this.competition.id + ':score-admin', () => this.loadMatches());
+    }
+
+    loadMatches() {
+        return this.matchService
             .findAll(this.competition)
             .then((matches) => this.matches = matches);
     }
