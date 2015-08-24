@@ -14,32 +14,29 @@ class AddMatchDirective {
 }
 
 class AddMatchController {
-    constructor(teamService, matchService) {
+    constructor(teamService, matchService, toaster) {
         this.teamService = teamService;
         this.matchService = matchService;
-        this.newMatch = {
-            date : new Date(),
-            competition : this.competition
-        };
+        this.toaster = toaster;
+        this.resetMatch();
     }
-
-    open() {
-        this.opened = true;
-    }
-
-    /*
-    onChangeDate() {
-        var gmtDate = new Date(this.newMatch.stringDate);
-        this.newMatch.date = new Date(gmtDate.valueOf() + gmtDate.getTimezoneOffset() * 60000);
-    }*/
 
     save() {
         return this.matchService
-            .save(this.newMatch);
+            .save(this.newMatch)
+            .then(() => this.resetMatch())
+            .then(() => this.toaster.pop('success', "Match added", "A new match have been added"));
     }
 
     findByName(value) {
         return this.teamService.findByName(value);
+    }
+
+    resetMatch() {
+        this.newMatch = {
+            date : new Date(),
+            competition : this.competition
+        };
     }
 }
 

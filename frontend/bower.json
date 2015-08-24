@@ -10,7 +10,8 @@
     "bootstrap": "~3.3.5",
     "angular-bootstrap": "~0.13.3",
     "restangular": "~1.5.1",
-    "angular-loading-bar": "~0.7.1"
+    "angular-loading-bar": "~0.7.1",
+    "angularjs-toaster": "~0.4.15"
   },
   "resolutions": {
     "angular": "1.4.4",

@@ -33,7 +33,7 @@ class BetSelectorController {
             return {
                 'btn-success' : this.match.result === val,
                 'btn-primary' : this.match.result !== val
-            }
+            };
         }
 
         return {
