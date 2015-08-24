@@ -12,12 +12,16 @@ class LeaderBoardDirective {
 }
 
 class LeaderBoardController {
-    constructor(leaderBoardService) {
+    constructor(leaderBoardService, $scope) {
         this.leaderBoardService = leaderBoardService;
         this.orderBy = 'score';
         this.reverse = 'reverse';
 
-        this.leaderBoardService
+        $scope.$on('competition:'+ this.competition.id + ':leader-board', () => this.loadLeaderBoard());
+    }
+
+    loadLeaderBoard() {
+        return this.leaderBoardService
             .leaderBoardOf(this.competition)
             .then((leaderBoard) => this.leaderBoard = leaderBoard);
     }
