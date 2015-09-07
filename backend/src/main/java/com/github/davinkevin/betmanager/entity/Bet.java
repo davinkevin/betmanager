@@ -70,6 +70,10 @@ public class Bet {
             return Boolean.FALSE;
         }
 
+        return Boolean.TRUE;
+    }
+
+    public Boolean won() {
         return value == match.getResult();
     }
 

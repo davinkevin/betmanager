@@ -18,11 +18,16 @@ public class Score {
     final @JsonProperty Double quotedScore;
 
     public Score(List<Bet> bets, Map<Match, Quote> quotes) {
-        this.score = bets.stream().filter(Bet::isValid).count();
-        this.quotedScore = bets
+
+        this.score = bets.stream()
+                .filter(Bet::isValid)
+                .filter(Bet::won)
+                .count();
+
+        this.quotedScore = Math.max(bets
                 .stream()
                 .filter(Bet::isValid)
-                .mapToDouble(bet -> quotes.get(bet.getMatch()).getResult(bet.getValue()))
-                .sum();
+                .mapToDouble(bet -> bet.won() ? quotes.get(bet.getMatch()).getResult(bet.getValue()) : -1d)
+                .sum(), 0);
     }
 }
